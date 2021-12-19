@@ -5,6 +5,7 @@ let broadcaster;
 const port = 4000;
 
 const https = require("https");
+const path = require('path');
 const fs = require('fs');
 const homedir = require('os').homedir();
 const options = {

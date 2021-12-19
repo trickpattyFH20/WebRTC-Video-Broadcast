@@ -4,8 +4,15 @@ const app = express();
 let broadcaster;
 const port = 4000;
 
-const http = require("http");
-const server = http.createServer(app);
+const https = require("https");
+const fs = require('fs');
+const homedir = require('os').homedir();
+const options = {
+  key: fs.readFileSync(path.join(homedir, '.ssh', 'canary-webrtc-key.pem')),
+  cert: fs.readFileSync(path.join(homedir, '.ssh', 'canary-webrtc-cert.pem')),
+};
+
+const server = https.createServer(options, app);
 
 const io = require("socket.io")(server);
 app.use(express.static(__dirname + "/public"));
